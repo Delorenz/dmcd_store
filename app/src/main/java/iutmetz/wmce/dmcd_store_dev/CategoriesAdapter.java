@@ -38,7 +38,7 @@ public class CategoriesAdapter extends ArrayAdapter<Categorie> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        /*
+
         if (convertView==null) {
             // chargement du XML qui contient le layout d'affichage de la ligne
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_liste_categories, parent, false);
@@ -50,18 +50,18 @@ public class CategoriesAdapter extends ArrayAdapter<Categorie> {
             // affichage de l'image (conversion d'une chaîne en drawable)
             ImageView img = convertView.findViewById(R.id.ilc_visuel);
 
-            /*
+
             int id = getContext().getResources().getIdentifier(
                     this.listeCategories.get(position).getVisuel(),
                     "drawable",
                     getContext().getPackageName());
             img.setImageResource(id);
-            */
 
-        /*
+
+
         if (listeImagesCategories.get(position) == null){
-            int id = getContext().getResources().getIdentifier(this.listeCategories.get(position).getVisuel(),"drawable",getContext().getPackageName());
-            img.setImageResource(id);
+            int id_img = getContext().getResources().getIdentifier(this.listeCategories.get(position).getVisuel(),"drawable",getContext().getPackageName());
+            img.setImageResource(id_img);
         }else{
 
             Bitmap bmp  = listeImagesCategories.get(position);
@@ -70,7 +70,7 @@ public class CategoriesAdapter extends ArrayAdapter<Categorie> {
             }
 
         }
-        */
+
         return convertView;
 
 

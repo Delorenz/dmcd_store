@@ -1,21 +1,17 @@
 package iutmetz.wmce.dmcd_store_dev;
 
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.Toast;
-
 import iutmetz.wmce.dmcd_store_dev.interfaces.IGestionPanierCategorie;
 
-import static android.widget.Toast.LENGTH_LONG;
 
 public class activity_landing extends AppCompatActivity implements IGestionPanierCategorie /*,ClientFragment.OnFragmentInteractionListener */ {
 
-   // private CategoriesFragment categorieFragment;
+    private CategoriesFragment categorieFragment;
     private VenteCatalogueFragment venteCatalogueFragment;
  //   private ClientFragment clientFragment;
 
@@ -27,7 +23,7 @@ public class activity_landing extends AppCompatActivity implements IGestionPanie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
-/*
+
         if (savedInstanceState == null) {
             FragmentManager fm = getSupportFragmentManager();
             this.categorieFragment = (CategoriesFragment) fm.findFragmentByTag(CategoriesFragment.TAG);
@@ -40,7 +36,7 @@ public class activity_landing extends AppCompatActivity implements IGestionPanie
         } else {
             this.panier = savedInstanceState.getDouble("panier");
         }
-*/
+
     }
 
     @Override

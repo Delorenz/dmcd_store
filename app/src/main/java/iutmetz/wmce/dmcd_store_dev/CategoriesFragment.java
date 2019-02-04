@@ -21,8 +21,8 @@ import iutmetz.wmce.dmcd_store_dev.modele.Categorie;
 
 
 
-//public class CategoriesFragment extends Fragment implements AdapterView.OnItemClickListener, ActiviteEnAttenteImage, ActiviteEnAttenteFindAll, View.OnClickListener {
-/*
+public class CategoriesFragment extends Fragment implements AdapterView.OnItemClickListener, ActiviteEnAttenteImage, ActiviteEnAttenteFindAll, View.OnClickListener {
+
     public static final String TAG = "cat_tag";
 
     private ArrayList<Categorie> listeCategories;
@@ -91,7 +91,7 @@ import iutmetz.wmce.dmcd_store_dev.modele.Categorie;
 
 
 
-/*
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         IGestionPanierCategorie activite = (IGestionPanierCategorie) this.getActivity();
@@ -105,7 +105,7 @@ import iutmetz.wmce.dmcd_store_dev.modele.Categorie;
      */
 
 
-/*
+
     private void updatePanier() {
         this.txtPanier.setText(String.format(getString(R.string.panier), ParentActivity.getPanier()));
     }
@@ -125,7 +125,7 @@ import iutmetz.wmce.dmcd_store_dev.modele.Categorie;
         for(int i=0; i<this.listeCategories.size();i++){
             this.listeImagesCategories.add(null);
             ImageFromURL chargement = new ImageFromURL(this);
-            chargement.execute("https://infodb.iutmetz.univ-lorraine.fr/~delorenz2u/android/"+this.listeCategories.get(i).getVisuel(),String.valueOf(i));
+            chargement.execute("url"+this.listeCategories.get(i).getVisuel(),String.valueOf(i));
         }
     }
 
@@ -149,4 +149,3 @@ import iutmetz.wmce.dmcd_store_dev.modele.Categorie;
         }
     }
 }
-*/

@@ -1,3 +1,37 @@
 <resources>
     <string name="app_name">dmcd_store_dev</string>
+
+<string name="vc_txt_tarifproduit">Tarif : %1$.2f \u20ac</string>
+<string name="Retour">Retour</string>
+<string name="Annuler">Annuler</string>
+<string name="confirm_phrase">Etes vous sur de vouloir annuler ? Les produits ajoutés au panier ne seront pas sauvegardés</string>
+<string name="confirm_titre">Annuler</string>
+<string name="confirm_oui">Confirmer</string>
+<string name="confirm_non">Retour</string>
+<string name="btn_next"> > </string>
+<string name="btn_prev"> &#60; </string>
+<string name="img_desc"> Loading</string>
+<string name="panier">Total panier : %1$.2f €</string>
+<string name="desc">Loading</string>
+<string-array name="array_taille">
+    <item>S</item>
+    <item>M</item>
+    <item>L</item>
+    <item>XL</item>
+    <item>XXL</item>
+
+</string-array>
+<string-array name="array_coloris">
+    <item>rouge</item>
+    <item>vert</item>
+    <item>orange</item>
+
+
+</string-array>
+<string name="AjoutPanier">Produit no %1$d ajouté au panier</string>
+<string name="prix">45,99€</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+<string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
