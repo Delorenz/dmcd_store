@@ -21,7 +21,7 @@ public class ImageFromURL extends AsyncTask<String,Void,Object[]> {
     protected Object[] doInBackground(String... urlEtIndice) {
         String urlImage = urlEtIndice[0];
         Bitmap image = null;
-        Log.e("url", urlEtIndice[0]);
+        Log.e("'", urlEtIndice[0]);
         try{
             InputStream in =new URL(urlImage).openStream();
             image=BitmapFactory.decodeStream(in);

@@ -16,7 +16,7 @@ import iutmetz.wmce.dmcd_store_dev.modele.Categorie;
 public class CategorieDAO implements DAO {
 
     public static final String TABLE="Categorie";
-    private final String URL_SERVEUR = "https://infodb.iutmetz.univ-lorraine.fr/~delorenz2u/android/";
+    private final String URL_SERVEUR = "https://storedmcd.000webhostapp.com/";
     private ActiviteEnAttenteFindAll activite;
     private static CategorieDAO categorieDAO = null;
 
@@ -34,9 +34,9 @@ public class CategorieDAO implements DAO {
 
 
     public void findAll(){
-      //  RequeteSQL req = new RequeteSQL(activite, this);
-       // req.execute(TABLE, URL_SERVEUR + "categories.php");
-        //Log.e("requete", "req executed");
+       RequeteSQL req = new RequeteSQL(activite, this);
+       req.execute(TABLE, URL_SERVEUR + "Categories.php");
+       Log.e("requete", "req executed");
 
     }
 

@@ -125,7 +125,7 @@ public class CategoriesFragment extends Fragment implements AdapterView.OnItemCl
         for(int i=0; i<this.listeCategories.size();i++){
             this.listeImagesCategories.add(null);
             ImageFromURL chargement = new ImageFromURL(this);
-            chargement.execute("url"+this.listeCategories.get(i).getVisuel(),String.valueOf(i));
+            chargement.execute("https://storedmcd.000webhostapp.com/"+this.listeCategories.get(i).getVisuel(),String.valueOf(i));
         }
     }
 
