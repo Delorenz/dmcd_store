@@ -17,7 +17,7 @@ public class ProduitDAO implements DAO {
 
     private ActiviteEnAttenteFindProduits activite;
     public static final String TABLE="Produits";
-    private final String URL_SERVEUR = "https://infodb.iutmetz.univ-lorraine.fr/~delorenz2u/android/produits.php";
+    private final String URL_SERVEUR = "https://storedmcd.000webhostapp.com/";
     private static ProduitDAO produitDAO = null;
 
     public ProduitDAO(ActiviteEnAttenteFindProduits activite) {
@@ -36,9 +36,9 @@ public class ProduitDAO implements DAO {
 
 
     public void findProduitsByCateg(int id_categ){
-      //  RequeteSQL req = new RequeteSQL(activite, this);
-     //   req.execute(TABLE, URL_SERVEUR + "?id_categ="+id_categ);
-     //   Log.e("requete", "req executed");
+        RequeteSQL req = new RequeteSQL(activite, this);
+        req.execute(TABLE, URL_SERVEUR + "Produits.php?id_categ="+id_categ);
+        Log.e("requete", "req executed");
 
     }
 

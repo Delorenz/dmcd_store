@@ -15,7 +15,7 @@ import iutmetz.wmce.dmcd_store_dev.modele.Taille;
 public class TailleDAO implements DAO {
 
     public static final String TABLE="Taille";
-    private final String URL_SERVEUR = "https://infodb.iutmetz.univ-lorraine.fr/~delorenz2u/android/";
+    private final String URL_SERVEUR = "https://storedmcd.000webhostapp.com/";
     private ActiviteEnAttenteTaille activite;
     private static TailleDAO tailleDAO = null;
 
@@ -37,8 +37,8 @@ public class TailleDAO implements DAO {
 
     public void findTaille(int id_produit){
         RequeteSQL req = new RequeteSQL(activite, this);
-        req.execute(TABLE, URL_SERVEUR + "produits.php?id_produit="+ id_produit);
-        Log.e("requete", "req executed");
+        req.execute(TABLE, URL_SERVEUR + "Produits.php?id_produit="+ id_produit);
+        Log.e("requete taille", "req executed");
 
     }
 

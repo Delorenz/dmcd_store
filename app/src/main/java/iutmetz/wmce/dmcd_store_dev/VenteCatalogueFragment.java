@@ -52,8 +52,8 @@ public class VenteCatalogueFragment extends Fragment implements View.OnClickList
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.e("on createView","Not implemented !");
-        return null; //return inflater.inflate(R.layout.fragment_vente_catalogue, container, false);
+       // Log.e("on createView","Not implemented !");
+        return inflater.inflate(R.layout.fragment_vente_catalogue, container, false);
     }
 
 
@@ -85,7 +85,7 @@ public class VenteCatalogueFragment extends Fragment implements View.OnClickList
 
             Log.e("onCreate","noSave");
             ProduitDAO.getInstance(this).findProduitsByCateg(getArguments().getInt("id_categ"));
-
+            TailleDAO.getInstance(this).findTaille(noProduitCourant);
 
 
         }else{
@@ -108,9 +108,9 @@ public class VenteCatalogueFragment extends Fragment implements View.OnClickList
     public void onStart() {
         super.onStart();
 
-        Log.e("onStart","Not implemented !");
+        //Log.e("onStart","Not implemented !");
 
-        /*
+
         this.imgV = (ImageView) this.getActivity().findViewById(R.id.imageView);
         this.btn_prev = (Button) this.getActivity().findViewById(R.id.button_prev);
         this.btn_next = (Button) this.getActivity().findViewById(R.id.button_next);
@@ -131,7 +131,7 @@ public class VenteCatalogueFragment extends Fragment implements View.OnClickList
         tailles.setAdapter(adapter);
         Log.e("onStart"," adapter init end");
 
-*/
+
         Log.e("onStart","end");
 
     }
@@ -169,7 +169,7 @@ public class VenteCatalogueFragment extends Fragment implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        /*
+
         if(v == getActivity().findViewById(R.id.button_next) && noProduitCourant<this.liste.size()){
             this.noProduitCourant++;
             TailleDAO.getInstance(this).findTaille(liste.get(noProduitCourant).getId());
@@ -195,6 +195,7 @@ public class VenteCatalogueFragment extends Fragment implements View.OnClickList
 
         }
 
+        /*
         //ZOOM IMG
         if(v == getActivity().findViewById(R.id.imageView)){
             onClickImage(this.getActivity().getCurrentFocus());
@@ -230,7 +231,7 @@ public class VenteCatalogueFragment extends Fragment implements View.OnClickList
         for(int i=0; i<=this.liste.size()-1;i++){
             this.listeImages.add(null);
             ImageFromURL chargement = new ImageFromURL(this);
-            chargement.execute("https://infodb.iutmetz.univ-lorraine.fr/~delorenz2u/android/"+this.liste.get(i).getVisuel(),String.valueOf(i));
+            chargement.execute("https://storedmcd.000webhostapp.com/"+this.liste.get(i).getVisuel(),String.valueOf(i));
         }
     }
 
@@ -259,7 +260,7 @@ public class VenteCatalogueFragment extends Fragment implements View.OnClickList
 
 
     }
-
+/*
     public void onClickImage(View view) {
         this.btn_next.setVisibility(View.GONE);
         this.btn_prev.setVisibility(View.GONE);
@@ -277,5 +278,5 @@ public class VenteCatalogueFragment extends Fragment implements View.OnClickList
         this.btn_next.setVisibility(View.VISIBLE);
         this.imgProduitZoom.setVisibility(View.GONE);
     }
-
+*/
 }

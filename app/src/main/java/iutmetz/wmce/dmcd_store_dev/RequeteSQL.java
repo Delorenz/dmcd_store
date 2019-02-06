@@ -9,6 +9,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import javax.net.ssl.HttpsURLConnection;
+
 import iutmetz.wmce.dmcd_store_dev.interfaces.ActiviteEnAttente;
 import iutmetz.wmce.dmcd_store_dev.interfaces.DAO;
 
@@ -34,7 +36,7 @@ public class RequeteSQL extends AsyncTask<String, Void, String[]> {
         String urlRequete = codeEtUrl[1];
         StringBuilder resultat= new StringBuilder(1024);
         try{
-            final HttpURLConnection conn = (HttpURLConnection) new URL(urlRequete).openConnection();
+            final HttpsURLConnection conn = (HttpsURLConnection) new URL(urlRequete).openConnection();
             conn.setReadTimeout(10000);
             conn.setConnectTimeout(15000);
             conn.setRequestMethod("GET");
