@@ -10,15 +10,17 @@ import android.view.MenuItem;
 import iutmetz.wmce.dmcd_store_dev.interfaces.IGestionPanierCategorie;
 
 
-public class activity_landing extends AppCompatActivity implements IGestionPanierCategorie ,ClientFragment.OnFragmentInteractionListener  {
+public class activity_landing extends AppCompatActivity implements IGestionPanierCategorie ,ClientFragment.OnFragmentInteractionListener, NvClientFragment.OnFragmentInteractionListener, InfoClientFragment.OnFragmentInteractionListener  {
 
     private CategoriesFragment categorieFragment;
     private VenteCatalogueFragment venteCatalogueFragment;
     private ClientFragment clientFragment;
+    private InfoClientFragment infoClientFragment;
 
     // Le panier ne sert à rien dans cet exemple
     // il a été laissé car servira par la suite...
     private double panier;
+    private NvClientFragment NvClientFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +145,34 @@ public class activity_landing extends AppCompatActivity implements IGestionPanie
         ft.addToBackStack(null);
         ft.commit();
 
+    }
+
+    @Override
+    public void DisplayNvClientFragment() {
+        FragmentManager fm = this.getSupportFragmentManager();
+        this.NvClientFragment = (NvClientFragment) fm.findFragmentByTag(NvClientFragment.TAG);
+        if (this.NvClientFragment == null) {
+            this.NvClientFragment = new NvClientFragment();
+        }
+
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.fragment1, this.NvClientFragment, NvClientFragment.TAG);
+        ft.addToBackStack(null);
+        ft.commit();
+    }
+
+    @Override
+    public void DisplayInfoClientFragment() {
+        FragmentManager fm = this.getSupportFragmentManager();
+        this.infoClientFragment = (InfoClientFragment) fm.findFragmentByTag(infoClientFragment.TAG);
+        if (this.infoClientFragment == null) {
+            this.infoClientFragment= new InfoClientFragment();
+        }
+
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.fragment1, this.infoClientFragment, InfoClientFragment.TAG);
+        ft.addToBackStack(null);
+        ft.commit();
     }
 
 

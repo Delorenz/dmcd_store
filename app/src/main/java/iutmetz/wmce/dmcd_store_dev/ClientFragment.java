@@ -4,10 +4,15 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import java.io.Serializable;
 
 import iutmetz.wmce.dmcd_store_dev.interfaces.ActiviteEnAttenteFindClient;
 import iutmetz.wmce.dmcd_store_dev.interfaces.IGestionPanierCategorie;
@@ -24,19 +29,15 @@ import iutmetz.wmce.dmcd_store_dev.modele.Client;
  */
 
 
-public class ClientFragment extends Fragment implements ActiviteEnAttenteFindClient {
+public class ClientFragment extends Fragment implements ActiviteEnAttenteFindClient, View.OnClickListener {
     public static final String TAG = "cl_tag";
     IGestionPanierCategorie ParentActivity;
     private Client client;
     private TextView text;
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private EditText login;
+    private EditText mdp;
+    private Button login_btn;
+    private Button nv_compte;
 
     private OnFragmentInteractionListener mListener;
 
@@ -44,22 +45,13 @@ public class ClientFragment extends Fragment implements ActiviteEnAttenteFindCli
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ClientFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
 
 
     public static ClientFragment newInstance(String param1, String param2) {
         ClientFragment fragment = new ClientFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -68,8 +60,7 @@ public class ClientFragment extends Fragment implements ActiviteEnAttenteFindCli
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
 
         if (savedInstanceState==null) {
@@ -121,6 +112,27 @@ public class ClientFragment extends Fragment implements ActiviteEnAttenteFindCli
 
     }
 
+    @Override
+    public void onClick(View v) {
+        if(v == this.getActivity().findViewById(R.id.login)){
+            Log.e("Login pressed", "ok");
+            if( login.getText().length()  != 0 && mdp.getText().length() != 0 ){
+                //Envoie des données en POST, comparaison login/mdp et si OK redirection vers Infos Client
+                //Si NOK message d'erreur + proposition creation nv compte
+                IGestionPanierCategorie activite = (IGestionPanierCategorie) this.getActivity();
+                activite.DisplayInfoClientFragment();
+
+            }
+        }
+
+        if(v == nv_compte){
+            //redirection page inscription
+            Log.e("nv compte pressed", "ok");
+            IGestionPanierCategorie activite = (IGestionPanierCategorie) this.getActivity();
+            activite.DisplayNvClientFragment();
+        }
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -146,11 +158,17 @@ public class ClientFragment extends Fragment implements ActiviteEnAttenteFindCli
         super.onStart();
         ParentActivity = (IGestionPanierCategorie) this.getActivity();
         this.text = this.getActivity().findViewById(R.id.info_client);
+        this.login = this.getActivity().findViewById(R.id.login_co);
+        this.mdp = this.getActivity().findViewById(R.id.mdp_co);
+        this.login_btn = this.getActivity().findViewById(R.id.login);
+        this.nv_compte = this.getActivity().findViewById(R.id.nvcompte);
+        this.nv_compte.setOnClickListener(this);
+        this.login_btn.setOnClickListener(this);
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable("info_cl", this.client.toString());
+        outState.putSerializable("info_cl", (Serializable) this.client);
     }
 }

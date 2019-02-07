@@ -12,6 +12,10 @@ public interface IGestionPanierCategorie {
     public void onClickAjoutPanier(VenteCatalogueFragment venteCatalogueFragment, int noProduitCourant);
 
     void DisplayClientFragment();
+
+    void DisplayNvClientFragment();
+
+    void DisplayInfoClientFragment();
 }
 
 
