@@ -1,6 +1,7 @@
 package iutmetz.wmce.dmcd_store_dev;
 
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -9,11 +10,11 @@ import android.view.MenuItem;
 import iutmetz.wmce.dmcd_store_dev.interfaces.IGestionPanierCategorie;
 
 
-public class activity_landing extends AppCompatActivity implements IGestionPanierCategorie /*,ClientFragment.OnFragmentInteractionListener */ {
+public class activity_landing extends AppCompatActivity implements IGestionPanierCategorie ,ClientFragment.OnFragmentInteractionListener  {
 
     private CategoriesFragment categorieFragment;
     private VenteCatalogueFragment venteCatalogueFragment;
- //   private ClientFragment clientFragment;
+    private ClientFragment clientFragment;
 
     // Le panier ne sert à rien dans cet exemple
     // il a été laissé car servira par la suite...
@@ -126,7 +127,7 @@ public class activity_landing extends AppCompatActivity implements IGestionPanie
     @Override
     public void DisplayClientFragment() {
 
-        /*
+
         FragmentManager fm = this.getSupportFragmentManager();
         this.clientFragment = (ClientFragment) fm.findFragmentByTag(clientFragment.TAG);
         if (this.clientFragment == null) {
@@ -140,10 +141,13 @@ public class activity_landing extends AppCompatActivity implements IGestionPanie
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.fragment1, this.clientFragment, ClientFragment.TAG);
         ft.addToBackStack(null);
-        ft.commit(); */
+        ft.commit();
 
     }
 
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
+    }
 }

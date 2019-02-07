@@ -9,12 +9,12 @@ import org.json.JSONObject;
 import iutmetz.wmce.dmcd_store_dev.interfaces.ActiviteEnAttenteFindClient;
 import iutmetz.wmce.dmcd_store_dev.interfaces.DAO;
 import iutmetz.wmce.dmcd_store_dev.modele.Client;
-/*
+
 public class ClientDAO implements DAO {
     //BdD : Client(id_client, nom, prenom, identifiant, mot_de_passe, adr_numero, adr_voie, adr_code_postal, adr_ville, adr_pays)
 
     public static final String TABLE="Client";
-    private final String URL_SERVEUR = "http://localhost/androidtest/";
+    private final String URL_SERVEUR = "https://storedmcd.000webhostapp.com/";
     private ActiviteEnAttenteFindClient activite;
     private static ClientDAO clientDAO = null;
 
@@ -31,7 +31,7 @@ public class ClientDAO implements DAO {
     }
     public void findClient(){
         RequeteSQL req = new RequeteSQL(activite, this);
-        req.execute(TABLE, "https://127.0.0.1/androidtest/" + "Client.php?id_client=1");
+        req.execute(TABLE, URL_SERVEUR + "Client.php?id_client=1");
         Log.e("requete cl", "req client executed");
 
     }
@@ -68,6 +68,9 @@ public class ClientDAO implements DAO {
         }
     }
 
+    public void postData() {
+
+    }
+
 }
 
-*/

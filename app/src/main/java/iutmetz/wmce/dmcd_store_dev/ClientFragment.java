@@ -23,11 +23,11 @@ import iutmetz.wmce.dmcd_store_dev.modele.Client;
  * create an instance of this fragment.
  */
 
-/*
+
 public class ClientFragment extends Fragment implements ActiviteEnAttenteFindClient {
     public static final String TAG = "cl_tag";
     IGestionPanierCategorie ParentActivity;
-
+    private Client client;
     private TextView text;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,7 +43,7 @@ public class ClientFragment extends Fragment implements ActiviteEnAttenteFindCli
     public ClientFragment() {
         // Required empty public constructor
     }
-*/
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -54,7 +54,7 @@ public class ClientFragment extends Fragment implements ActiviteEnAttenteFindCli
      */
     // TODO: Rename and change types and number of parameters
 
-/*
+
     public static ClientFragment newInstance(String param1, String param2) {
         ClientFragment fragment = new ClientFragment();
         Bundle args = new Bundle();
@@ -77,6 +77,9 @@ public class ClientFragment extends Fragment implements ActiviteEnAttenteFindCli
             ClientDAO.getInstance(this).findClient();
 
 
+        }else{
+            this.client = (Client) savedInstanceState.getSerializable("client");
+            this.text.setText(client.toString());
         }
     }
 
@@ -113,11 +116,11 @@ public class ClientFragment extends Fragment implements ActiviteEnAttenteFindCli
 
     @Override
     public void notifyRetourRequeteFindClient(String code, Client client) {
-
+        this.client = client;
         this.text.setText(client.toString());
 
     }
-*/
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -131,7 +134,7 @@ public class ClientFragment extends Fragment implements ActiviteEnAttenteFindCli
 
 
 
-    /*
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
@@ -144,5 +147,10 @@ public class ClientFragment extends Fragment implements ActiviteEnAttenteFindCli
         ParentActivity = (IGestionPanierCategorie) this.getActivity();
         this.text = this.getActivity().findViewById(R.id.info_client);
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("info_cl", this.client.toString());
+    }
 }
-*/
