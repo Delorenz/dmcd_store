@@ -5,6 +5,7 @@ import iutmetz.wmce.dmcd_store_dev.modele.Client;
 
 public interface ActiviteEnAttenteFindClient extends ActiviteEnAttente {
 
-    public void notifyRetourRequeteFindClient(String code, Client client);
+    void notifyRetourRequeteFindClient(String code, Client client);
 
+    void notifyRetourRequetePOST(String code, Client client);
 }

@@ -26,6 +26,10 @@ public class Client {
         this.adr_pays = adr_pays;
     }
 
+    public Client() {
+
+    }
+
     public int getId_client() {
         return id_client;
     }

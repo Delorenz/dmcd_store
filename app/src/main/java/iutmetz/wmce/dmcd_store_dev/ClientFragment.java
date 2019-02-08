@@ -32,6 +32,7 @@ import iutmetz.wmce.dmcd_store_dev.modele.Client;
 public class ClientFragment extends Fragment implements ActiviteEnAttenteFindClient, View.OnClickListener {
     public static final String TAG = "cl_tag";
     IGestionPanierCategorie ParentActivity;
+
     private Client client;
     private TextView text;
     private EditText login;
@@ -48,13 +49,6 @@ public class ClientFragment extends Fragment implements ActiviteEnAttenteFindCli
 
 
 
-    public static ClientFragment newInstance(String param1, String param2) {
-        ClientFragment fragment = new ClientFragment();
-        Bundle args = new Bundle();
-
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,7 +59,7 @@ public class ClientFragment extends Fragment implements ActiviteEnAttenteFindCli
 
         if (savedInstanceState==null) {
 
-            ClientDAO.getInstance(this).findClient();
+            // ClientDAO.getInstance(this).findClient();
 
 
         }else{
@@ -113,14 +107,25 @@ public class ClientFragment extends Fragment implements ActiviteEnAttenteFindCli
     }
 
     @Override
+    public void notifyRetourRequetePOST(String code, Client client) {
+        this.client = client;
+        this.text.setText(client.toString());
+    }
+
+    @Override
     public void onClick(View v) {
         if(v == this.getActivity().findViewById(R.id.login)){
             Log.e("Login pressed", "ok");
             if( login.getText().length()  != 0 && mdp.getText().length() != 0 ){
+                Client cl = new Client();
+                cl.setIdentifiant(String.valueOf(login.getText()));
+                cl.setMot_de_passe(String.valueOf(mdp.getText()));
+
+                ClientDAO.getInstance(this).postData(cl);
                 //Envoie des données en POST, comparaison login/mdp et si OK redirection vers Infos Client
                 //Si NOK message d'erreur + proposition creation nv compte
-                IGestionPanierCategorie activite = (IGestionPanierCategorie) this.getActivity();
-                activite.DisplayInfoClientFragment();
+                //IGestionPanierCategorie activite = (IGestionPanierCategorie) this.getActivity();
+                // activite.DisplayInfoClientFragment();
 
             }
         }
@@ -171,4 +176,5 @@ public class ClientFragment extends Fragment implements ActiviteEnAttenteFindCli
         super.onSaveInstanceState(outState);
         outState.putSerializable("info_cl", (Serializable) this.client);
     }
+
 }

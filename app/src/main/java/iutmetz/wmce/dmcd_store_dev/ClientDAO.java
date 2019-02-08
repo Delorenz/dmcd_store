@@ -29,6 +29,8 @@ public class ClientDAO implements DAO {
         return clientDAO;
 
     }
+
+
     public void findClient(){
         RequeteSQL req = new RequeteSQL(activite, this);
         req.execute(TABLE, URL_SERVEUR + "Client.php?id_client=1");
@@ -68,8 +70,41 @@ public class ClientDAO implements DAO {
         }
     }
 
-    public void postData() {
+    public void postData(Client params) {
+        RequetePOST req = new RequetePOST(activite, this, params);
+        req.execute(TABLE, URL_SERVEUR + "Client.php");
+        Log.e("requete POST cl", "req client launched");
+    }
 
+    public void traiteResultatRequetePOST(String[] result) {
+        Log.e("Res requete POST client", "debut retour requete");
+        Log.e("Resultat POST dump", String.valueOf(result[0]));
+
+        try {
+
+            JSONArray array = new JSONArray(result[1]);
+            JSONObject row = array.getJSONObject(0);
+
+            Client c = new Client(row.getInt("id_client"),
+                    row.getString("nom"),
+                    row.getString("prenom"),
+                    row.getString("identifiant"),
+                    row.getString("mot_de_passe"),
+                    row.getInt("adr_numero"),
+                    row.getString("adr_voie"),
+                    row.getInt("adr_code_postal"),
+                    row.getString("adr_ville"),
+                    row.getString("adr_pays")
+
+
+            );
+
+            Log.e("Resultat POST obj dump", c.toString());
+
+            this.activite.notifyRetourRequetePOST(result[0], c);
+        } catch (JSONException je) {
+            Log.e("pb json POST cl", je.getMessage());
+        }
     }
 
 }

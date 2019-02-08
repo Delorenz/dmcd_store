@@ -7,7 +7,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
 import iutmetz.wmce.dmcd_store_dev.interfaces.IGestionPanierCategorie;
+import iutmetz.wmce.dmcd_store_dev.modele.Client;
 
 
 public class activity_landing extends AppCompatActivity implements IGestionPanierCategorie ,ClientFragment.OnFragmentInteractionListener, NvClientFragment.OnFragmentInteractionListener, InfoClientFragment.OnFragmentInteractionListener  {
@@ -16,6 +18,8 @@ public class activity_landing extends AppCompatActivity implements IGestionPanie
     private VenteCatalogueFragment venteCatalogueFragment;
     private ClientFragment clientFragment;
     private InfoClientFragment infoClientFragment;
+    private Client cl_connected = null;
+
 
     // Le panier ne sert à rien dans cet exemple
     // il a été laissé car servira par la suite...
@@ -131,7 +135,7 @@ public class activity_landing extends AppCompatActivity implements IGestionPanie
 
 
         FragmentManager fm = this.getSupportFragmentManager();
-        this.clientFragment = (ClientFragment) fm.findFragmentByTag(clientFragment.TAG);
+        this.clientFragment = (ClientFragment) fm.findFragmentByTag(ClientFragment.TAG);
         if (this.clientFragment == null) {
             this.clientFragment = new ClientFragment();
         }
@@ -150,13 +154,13 @@ public class activity_landing extends AppCompatActivity implements IGestionPanie
     @Override
     public void DisplayNvClientFragment() {
         FragmentManager fm = this.getSupportFragmentManager();
-        this.NvClientFragment = (NvClientFragment) fm.findFragmentByTag(NvClientFragment.TAG);
+        this.NvClientFragment = (NvClientFragment) fm.findFragmentByTag(iutmetz.wmce.dmcd_store_dev.NvClientFragment.TAG);
         if (this.NvClientFragment == null) {
             this.NvClientFragment = new NvClientFragment();
         }
 
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.fragment1, this.NvClientFragment, NvClientFragment.TAG);
+        ft.replace(R.id.fragment1, this.NvClientFragment, iutmetz.wmce.dmcd_store_dev.NvClientFragment.TAG);
         ft.addToBackStack(null);
         ft.commit();
     }
@@ -164,7 +168,7 @@ public class activity_landing extends AppCompatActivity implements IGestionPanie
     @Override
     public void DisplayInfoClientFragment() {
         FragmentManager fm = this.getSupportFragmentManager();
-        this.infoClientFragment = (InfoClientFragment) fm.findFragmentByTag(infoClientFragment.TAG);
+        this.infoClientFragment = (InfoClientFragment) fm.findFragmentByTag(InfoClientFragment.TAG);
         if (this.infoClientFragment == null) {
             this.infoClientFragment= new InfoClientFragment();
         }
