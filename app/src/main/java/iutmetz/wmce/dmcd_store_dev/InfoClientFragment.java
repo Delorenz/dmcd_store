@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import iutmetz.wmce.dmcd_store_dev.interfaces.IGestionPanierCategorie;
+import iutmetz.wmce.dmcd_store_dev.modele.Client;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,10 +29,12 @@ public class InfoClientFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private Client cl;
     private OnFragmentInteractionListener mListener;
 
     public InfoClientFragment() {
+        // Recuperation du Client connecté depuis l'activité principale
+        this.cl = ((IGestionPanierCategorie) this.getActivity()).getCl_connected();
         // Required empty public constructor
     }
 

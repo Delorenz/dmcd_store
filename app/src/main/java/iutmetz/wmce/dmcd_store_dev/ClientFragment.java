@@ -103,14 +103,16 @@ public class ClientFragment extends Fragment implements ActiviteEnAttenteFindCli
     public void notifyRetourRequeteFindClient(String code, Client client) {
         this.client = client;
         this.text.setText(client.toString());
+        if (client != null) {
+            IGestionPanierCategorie activite = (IGestionPanierCategorie) this.getActivity();
+            activite.setCl_connected(client);
+            activite.DisplayInfoClientFragment();
+        } else {
+            Log.e("Login", "authentification failed");
+        }
 
     }
 
-    @Override
-    public void notifyRetourRequetePOST(String code, Client client) {
-        this.client = client;
-        this.text.setText(client.toString());
-    }
 
     @Override
     public void onClick(View v) {
@@ -121,7 +123,7 @@ public class ClientFragment extends Fragment implements ActiviteEnAttenteFindCli
                 cl.setIdentifiant(String.valueOf(login.getText()));
                 cl.setMot_de_passe(String.valueOf(mdp.getText()));
 
-                ClientDAO.getInstance(this).postData(cl);
+                ClientDAO.getInstance(this).postDataConnexion(cl);
                 //Envoie des données en POST, comparaison login/mdp et si OK redirection vers Infos Client
                 //Si NOK message d'erreur + proposition creation nv compte
                 //IGestionPanierCategorie activite = (IGestionPanierCategorie) this.getActivity();

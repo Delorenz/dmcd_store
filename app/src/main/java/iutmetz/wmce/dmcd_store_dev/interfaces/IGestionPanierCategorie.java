@@ -1,21 +1,27 @@
 package iutmetz.wmce.dmcd_store_dev.interfaces;
 
 import iutmetz.wmce.dmcd_store_dev.VenteCatalogueFragment;
+import iutmetz.wmce.dmcd_store_dev.modele.Client;
 
 public interface IGestionPanierCategorie {
 
-    public void DisplayProductFragment(int id);
-    public double getPanier();
+    void DisplayProductFragment(int id);
 
-    public void setPanier(double tarif);
+    double getPanier();
 
-    public void onClickAjoutPanier(VenteCatalogueFragment venteCatalogueFragment, int noProduitCourant);
+    void setPanier(double tarif);
+
+    void onClickAjoutPanier(VenteCatalogueFragment venteCatalogueFragment, int noProduitCourant);
 
     void DisplayClientFragment();
 
     void DisplayNvClientFragment();
 
     void DisplayInfoClientFragment();
+
+    Client getCl_connected();
+
+    void setCl_connected(Client client);
 }
 
 

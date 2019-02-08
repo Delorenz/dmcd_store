@@ -18,6 +18,15 @@ public class activity_landing extends AppCompatActivity implements IGestionPanie
     private VenteCatalogueFragment venteCatalogueFragment;
     private ClientFragment clientFragment;
     private InfoClientFragment infoClientFragment;
+
+    public Client getCl_connected() {
+        return cl_connected;
+    }
+
+    public void setCl_connected(Client cl_connected) {
+        this.cl_connected = cl_connected;
+    }
+
     private Client cl_connected = null;
 
 

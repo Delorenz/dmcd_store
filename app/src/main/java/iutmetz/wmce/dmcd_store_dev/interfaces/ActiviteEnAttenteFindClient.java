@@ -7,5 +7,4 @@ public interface ActiviteEnAttenteFindClient extends ActiviteEnAttente {
 
     void notifyRetourRequeteFindClient(String code, Client client);
 
-    void notifyRetourRequetePOST(String code, Client client);
 }

@@ -1,3 +1,4 @@
+/*
 package iutmetz.wmce.dmcd_store_dev;
 
 import android.os.AsyncTask;
@@ -131,3 +132,4 @@ public class RequetePOST extends AsyncTask<String, Void, String[]> {
         this.dao.traiteResultatRequetePOST(result);
     }
 }
+*/

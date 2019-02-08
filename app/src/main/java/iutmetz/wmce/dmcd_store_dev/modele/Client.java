@@ -125,4 +125,5 @@ public class Client {
                 ", adr_pays='" + adr_pays + '\'' +
                 '}';
     }
+
 }

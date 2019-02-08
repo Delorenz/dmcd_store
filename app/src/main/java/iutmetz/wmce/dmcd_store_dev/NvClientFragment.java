@@ -4,9 +4,16 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+
+import iutmetz.wmce.dmcd_store_dev.interfaces.ActiviteEnAttenteFindClient;
+import iutmetz.wmce.dmcd_store_dev.interfaces.IGestionPanierCategorie;
+import iutmetz.wmce.dmcd_store_dev.modele.Client;
 
 
 /**
@@ -17,12 +24,21 @@ import android.view.ViewGroup;
  * Use the {@link NvClientFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NvClientFragment extends Fragment {
+public class NvClientFragment extends Fragment implements View.OnClickListener, ActiviteEnAttenteFindClient {
 
     public static final String TAG ="nv_client_tag";
-
-    // TODO: Rename and change types of parameters
-
+    IGestionPanierCategorie ParentActivity;
+    private EditText nom_form;
+    private EditText prenom_form;
+    private EditText identifiant_form;
+    private EditText mdp_form;
+    private EditText adr_numero_form;
+    private EditText adr_voie_form;
+    private EditText adr_cp_form;
+    private EditText adr_ville_form;
+    private EditText adr_pays_form;
+    private Client cl = new Client();
+    private Button validate;
 
     private OnFragmentInteractionListener mListener;
 
@@ -53,12 +69,21 @@ public class NvClientFragment extends Fragment {
         if (getArguments() != null) {
 
         }
+
+        if (savedInstanceState == null) {
+
+            // ClientDAO.getInstance(this).findClient();
+
+
+        } else {
+            //this.client = (Client) savedInstanceState.getSerializable("client");
+            //this.text.setText(client.toString());
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_nv_client, container, false);
     }
 
@@ -86,6 +111,36 @@ public class NvClientFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onClick(View v) {
+        if (v == validate) {
+
+            cl.setNom(String.valueOf(nom_form.getText()));
+            cl.setPrenom(String.valueOf(prenom_form.getText()));
+            cl.setIdentifiant(String.valueOf(identifiant_form.getText()));
+            cl.setMot_de_passe(String.valueOf(mdp_form.getText()));
+            cl.setAdr_numero(Integer.parseInt(String.valueOf(adr_numero_form.getText())));
+            cl.setAdr_voie(String.valueOf(adr_voie_form.getText()));
+            cl.setAdr_code_postal(Integer.parseInt(String.valueOf(adr_cp_form.getText())));
+            cl.setAdr_ville(String.valueOf(adr_ville_form.getText()));
+            cl.setAdr_pays(String.valueOf(adr_pays_form.getText()));
+            Log.e("Recup champs", cl.toString());
+
+            ClientDAO.getInstance(this).postDataCreationCompte(cl);
+            Log.e("NVCL", "request for client creation launched");
+
+            ClientDAO.getInstance(this).postDataConnexion(cl);
+            Log.e("NVCL", "check if successfully persisted");
+
+        }
+
+    }
+
+    @Override
+    public void notifyRetourRequeteFindClient(String code, Client client) {
+        Log.e("NVCL verif save cl", client.toString());
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -99,5 +154,23 @@ public class NvClientFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        this.nom_form = this.getActivity().findViewById(R.id.nom_form);
+        this.prenom_form = this.getActivity().findViewById(R.id.prenom_form);
+        this.identifiant_form = this.getActivity().findViewById(R.id.identifiant_form);
+        this.mdp_form = this.getActivity().findViewById(R.id.mdp_form);
+        this.adr_numero_form = this.getActivity().findViewById(R.id.adr_num_form);
+        this.adr_voie_form = this.getActivity().findViewById(R.id.adr_voie_form);
+        this.adr_cp_form = this.getActivity().findViewById(R.id.adr_cp_form);
+        this.adr_ville_form = this.getActivity().findViewById(R.id.adr_ville_form);
+        this.adr_pays_form = this.getActivity().findViewById(R.id.adr_pays_form);
+        this.validate = this.getActivity().findViewById(R.id.button_validate_nvcl);
+        this.validate.setOnClickListener(this);
     }
 }

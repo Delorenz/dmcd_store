@@ -70,42 +70,22 @@ public class ClientDAO implements DAO {
         }
     }
 
-    public void postData(Client params) {
-        RequetePOST req = new RequetePOST(activite, this, params);
-        req.execute(TABLE, URL_SERVEUR + "Client.php");
+    public void postDataConnexion(Client params) {
+        RequeteSQL req = new RequeteSQL(activite, this);
+        req.execute(TABLE, URL_SERVEUR + "Client.php?login=" + params.getIdentifiant() + "&password=" + params.getMot_de_passe());
         Log.e("requete POST cl", "req client launched");
     }
 
-    public void traiteResultatRequetePOST(String[] result) {
-        Log.e("Res requete POST client", "debut retour requete");
-        Log.e("Resultat POST dump", String.valueOf(result[0]));
-
-        try {
-
-            JSONArray array = new JSONArray(result[1]);
-            JSONObject row = array.getJSONObject(0);
-
-            Client c = new Client(row.getInt("id_client"),
-                    row.getString("nom"),
-                    row.getString("prenom"),
-                    row.getString("identifiant"),
-                    row.getString("mot_de_passe"),
-                    row.getInt("adr_numero"),
-                    row.getString("adr_voie"),
-                    row.getInt("adr_code_postal"),
-                    row.getString("adr_ville"),
-                    row.getString("adr_pays")
+    public void postDataCreationCompte(Client params) {
+        RequeteSQL req = new RequeteSQL(activite, this);
+        req.execute(TABLE, URL_SERVEUR + "Client.php?nom=" + params.getNom() + "&prenom=" + params.getPrenom() + "&identifiant=" + params.getIdentifiant() + "&password=" + params.getMot_de_passe() + "" +
+                "&adr_numero=" + params.getAdr_numero() + "&adr_voie=" + params.getAdr_voie() + "&adr_code_postal=" + params.getAdr_code_postal() +
+                "&adr_ville=" + params.getAdr_ville() + "&adr_pays=" + params.getAdr_pays() + "&nv-client=1");
+        Log.e("requete POST create cl", "req create client launched");
 
 
-            );
-
-            Log.e("Resultat POST obj dump", c.toString());
-
-            this.activite.notifyRetourRequetePOST(result[0], c);
-        } catch (JSONException je) {
-            Log.e("pb json POST cl", je.getMessage());
-        }
     }
+
 
 }
 
