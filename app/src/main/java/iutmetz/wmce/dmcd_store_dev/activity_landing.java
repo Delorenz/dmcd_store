@@ -18,6 +18,8 @@ public class activity_landing extends AppCompatActivity implements IGestionPanie
     private VenteCatalogueFragment venteCatalogueFragment;
     private ClientFragment clientFragment;
     private InfoClientFragment infoClientFragment;
+    private NvClientFragment NvClientFragment;
+    private Client cl_connected;
 
     public Client getCl_connected() {
         return cl_connected;
@@ -27,13 +29,10 @@ public class activity_landing extends AppCompatActivity implements IGestionPanie
         this.cl_connected = cl_connected;
     }
 
-    private Client cl_connected = null;
-
 
     // Le panier ne sert à rien dans cet exemple
     // il a été laissé car servira par la suite...
     private double panier;
-    private NvClientFragment NvClientFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

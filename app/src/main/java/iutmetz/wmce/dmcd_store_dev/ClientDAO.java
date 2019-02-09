@@ -78,7 +78,7 @@ public class ClientDAO implements DAO {
 
     public void postDataCreationCompte(Client params) {
         RequeteSQL req = new RequeteSQL(activite, this);
-        req.execute(TABLE, URL_SERVEUR + "Client.php?nom=" + params.getNom() + "&prenom=" + params.getPrenom() + "&identifiant=" + params.getIdentifiant() + "&password=" + params.getMot_de_passe() + "" +
+        req.execute(TABLE, URL_SERVEUR + "Client.php?nom=" + params.getNom() + "&prenom=" + params.getPrenom() + "&identifiant=" + params.getIdentifiant() + "&mot_de_passe=" + params.getMot_de_passe() + "" +
                 "&adr_numero=" + params.getAdr_numero() + "&adr_voie=" + params.getAdr_voie() + "&adr_code_postal=" + params.getAdr_code_postal() +
                 "&adr_ville=" + params.getAdr_ville() + "&adr_pays=" + params.getAdr_pays() + "&nv-client=1");
         Log.e("requete POST create cl", "req create client launched");

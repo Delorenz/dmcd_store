@@ -1,68 +1,78 @@
 package iutmetz.wmce.dmcd_store_dev;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import iutmetz.wmce.dmcd_store_dev.interfaces.IGestionPanierCategorie;
 import iutmetz.wmce.dmcd_store_dev.modele.Client;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link InfoClientFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link InfoClientFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class InfoClientFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+
     public static final String TAG = "info_client_tag";
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-    private Client cl;
+
+
     private OnFragmentInteractionListener mListener;
+    IGestionPanierCategorie ParentActivity;
+
+    private TextView nom_info;
+    private TextView prenom_info;
+    private TextView identifiant_info;
+    private TextView mdp_info;
+    private TextView adr_numero_info;
+    private TextView adr_voie_info;
+    private TextView adr_cp_info;
+    private TextView adr_ville_info;
+    private TextView adr_pays_info;
+
 
     public InfoClientFragment() {
-        // Recuperation du Client connecté depuis l'activité principale
-        this.cl = ((IGestionPanierCategorie) this.getActivity()).getCl_connected();
+
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment InfoClientFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static InfoClientFragment newInstance(String param1, String param2) {
-        InfoClientFragment fragment = new InfoClientFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        ParentActivity = (IGestionPanierCategorie) this.getActivity();
+        this.nom_info = this.getActivity().findViewById(R.id.nom_info);
+        this.prenom_info = this.getActivity().findViewById(R.id.prenom_info);
+        this.identifiant_info = this.getActivity().findViewById(R.id.identifiant_info);
+        this.mdp_info = this.getActivity().findViewById(R.id.mdp_info);
+        this.adr_numero_info = this.getActivity().findViewById(R.id.adr_numero_info);
+        this.adr_voie_info = this.getActivity().findViewById(R.id.adr_voie_info);
+        this.adr_cp_info = this.getActivity().findViewById(R.id.adr_cp_info);
+        this.adr_ville_info = this.getActivity().findViewById(R.id.adr_ville_info);
+        this.adr_pays_info = this.getActivity().findViewById(R.id.adr_pays_info);
+
+        if (ParentActivity.getCl_connected() != null) {
+            Client c = ParentActivity.getCl_connected();
+            nom_info.setText(c.getNom());
+            prenom_info.setText(c.getPrenom());
+            identifiant_info.setText(c.getIdentifiant());
+            mdp_info.setText(c.getMot_de_passe());
+            adr_numero_info.setText(String.valueOf(c.getAdr_numero()));
+            adr_cp_info.setText(String.valueOf(c.getAdr_code_postal()));
+            adr_voie_info.setText(c.getAdr_voie());
+            adr_ville_info.setText(c.getAdr_ville());
+            adr_pays_info.setText(c.getAdr_pays());
+        } else {
+            Log.e("INFO CL", "Non connecté !");
         }
+
     }
 
     @Override
@@ -72,12 +82,6 @@ public class InfoClientFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_info_client, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     @Override
     public void onAttach(Context context) {
@@ -107,7 +111,6 @@ public class InfoClientFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+
     }
 }

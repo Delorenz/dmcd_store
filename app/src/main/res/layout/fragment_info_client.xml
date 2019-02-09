@@ -68,7 +68,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView18"
+                    android:id="@+id/nom_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp" />
@@ -88,7 +88,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView19"
+                    android:id="@+id/prenom_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp" />
@@ -108,7 +108,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView21"
+                    android:id="@+id/identifiant_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp" />
@@ -128,7 +128,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView20"
+                    android:id="@+id/mdp_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp" />
@@ -155,7 +155,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/adr_numero_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </TableRow>
@@ -173,7 +173,7 @@
                     android:text="Voie :" />
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/adr_voie_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </TableRow>
@@ -192,7 +192,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/adr_cp_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </TableRow>
@@ -209,7 +209,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/adr_ville_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </TableRow>
@@ -226,7 +226,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/textView10"
+                    android:id="@+id/adr_pays_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -235,7 +235,7 @@
         </TableLayout>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btn_modif_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="70dp"
@@ -246,7 +246,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btn_suppr_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="70dp"

@@ -66,6 +66,7 @@ public class NvClientFragment extends Fragment implements View.OnClickListener, 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ParentActivity = (IGestionPanierCategorie) this.getActivity();
         if (getArguments() != null) {
 
         }
@@ -139,6 +140,11 @@ public class NvClientFragment extends Fragment implements View.OnClickListener, 
     @Override
     public void notifyRetourRequeteFindClient(String code, Client client) {
         Log.e("NVCL verif save cl", client.toString());
+        if (client != null) {
+            ParentActivity.setCl_connected(client);
+            IGestionPanierCategorie activite = (IGestionPanierCategorie) this.getActivity();
+            activite.DisplayInfoClientFragment();
+        }
     }
 
     /**

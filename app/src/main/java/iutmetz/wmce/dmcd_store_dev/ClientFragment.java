@@ -24,8 +24,7 @@ import iutmetz.wmce.dmcd_store_dev.modele.Client;
  * Activities that contain this fragment must implement the
  * {@link ClientFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link ClientFragment#newInstance} factory method to
- * create an instance of this fragment.
+ *
  */
 
 
@@ -53,6 +52,7 @@ public class ClientFragment extends Fragment implements ActiviteEnAttenteFindCli
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
 
         }
@@ -101,9 +101,10 @@ public class ClientFragment extends Fragment implements ActiviteEnAttenteFindCli
 
     @Override
     public void notifyRetourRequeteFindClient(String code, Client client) {
-        this.client = client;
-        this.text.setText(client.toString());
+
         if (client != null) {
+            this.client = client;
+            this.text.setText(client.toString());
             IGestionPanierCategorie activite = (IGestionPanierCategorie) this.getActivity();
             activite.setCl_connected(client);
             activite.DisplayInfoClientFragment();
@@ -163,6 +164,7 @@ public class ClientFragment extends Fragment implements ActiviteEnAttenteFindCli
     @Override
     public void onStart() {
         super.onStart();
+        this.ParentActivity = (IGestionPanierCategorie) this.getActivity();
         ParentActivity = (IGestionPanierCategorie) this.getActivity();
         this.text = this.getActivity().findViewById(R.id.info_client);
         this.login = this.getActivity().findViewById(R.id.login_co);
