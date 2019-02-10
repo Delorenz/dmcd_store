@@ -14,6 +14,7 @@ import iutmetz.wmce.dmcd_store_dev.modele.Client;
 
 public class activity_landing extends AppCompatActivity implements IGestionPanierCategorie ,ClientFragment.OnFragmentInteractionListener, NvClientFragment.OnFragmentInteractionListener, InfoClientFragment.OnFragmentInteractionListener  {
 
+
     private CategoriesFragment categorieFragment;
     private VenteCatalogueFragment venteCatalogueFragment;
     private ClientFragment clientFragment;
@@ -121,6 +122,32 @@ public class activity_landing extends AppCompatActivity implements IGestionPanie
         ft.addToBackStack(null);
         ft.commit();
     }
+
+    @Override
+    public void DisplayCategoriesFragment() {
+
+        FragmentManager fm = this.getSupportFragmentManager();
+        this.categorieFragment = (CategoriesFragment) fm.findFragmentByTag(CategoriesFragment.TAG);
+        if (this.categorieFragment == null) {
+            this.categorieFragment = new CategoriesFragment();
+        }
+
+
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.fragment1, this.categorieFragment, CategoriesFragment.TAG);
+        ft.addToBackStack(null);
+        ft.commit();
+    }
+
+
+
+
+
+
+
+
+
+
 
     public double getPanier(){
         return this.panier;

@@ -165,7 +165,7 @@ public class ClientFragment extends Fragment implements ActiviteEnAttenteFindCli
     public void onStart() {
         super.onStart();
         this.ParentActivity = (IGestionPanierCategorie) this.getActivity();
-        ParentActivity = (IGestionPanierCategorie) this.getActivity();
+
         this.text = this.getActivity().findViewById(R.id.info_client);
         this.login = this.getActivity().findViewById(R.id.login_co);
         this.mdp = this.getActivity().findViewById(R.id.mdp_co);
@@ -173,6 +173,12 @@ public class ClientFragment extends Fragment implements ActiviteEnAttenteFindCli
         this.nv_compte = this.getActivity().findViewById(R.id.nvcompte);
         this.nv_compte.setOnClickListener(this);
         this.login_btn.setOnClickListener(this);
+
+        if (this.ParentActivity.getCl_connected() != null) {
+            IGestionPanierCategorie activite = (IGestionPanierCategorie) this.getActivity();
+            activite.DisplayInfoClientFragment();
+
+        }
     }
 
     @Override

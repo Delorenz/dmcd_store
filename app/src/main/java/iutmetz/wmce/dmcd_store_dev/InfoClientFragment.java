@@ -7,12 +7,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import iutmetz.wmce.dmcd_store_dev.interfaces.IGestionPanierCategorie;
 import iutmetz.wmce.dmcd_store_dev.modele.Client;
 
-public class InfoClientFragment extends Fragment {
+public class InfoClientFragment extends Fragment implements View.OnClickListener {
 
     public static final String TAG = "info_client_tag";
 
@@ -30,6 +31,8 @@ public class InfoClientFragment extends Fragment {
     private TextView adr_ville_info;
     private TextView adr_pays_info;
 
+    private Button accueil_info;
+    private Button modif_info;
 
     public InfoClientFragment() {
 
@@ -57,6 +60,10 @@ public class InfoClientFragment extends Fragment {
         this.adr_cp_info = this.getActivity().findViewById(R.id.adr_cp_info);
         this.adr_ville_info = this.getActivity().findViewById(R.id.adr_ville_info);
         this.adr_pays_info = this.getActivity().findViewById(R.id.adr_pays_info);
+
+        this.accueil_info = this.getActivity().findViewById(R.id.btn_accueil_info);
+        this.modif_info = this.getActivity().findViewById(R.id.btn_modif_info);
+        this.accueil_info.setOnClickListener(this);
 
         if (ParentActivity.getCl_connected() != null) {
             Client c = ParentActivity.getCl_connected();
@@ -98,6 +105,13 @@ public class InfoClientFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == accueil_info) {
+            ParentActivity.DisplayCategoriesFragment();
+        }
     }
 
     /**

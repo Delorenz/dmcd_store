@@ -246,13 +246,13 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/btn_suppr_info"
+            android:id="@+id/btn_accueil_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="70dp"
             android:layout_marginRight="70dp"
             android:layout_marginBottom="40dp"
-            android:text="Supprimer"
+            android:text="Accueil"
             app:layout_constraintBottom_toBottomOf="@+id/view8"
             app:layout_constraintEnd_toEndOf="parent" />
 
