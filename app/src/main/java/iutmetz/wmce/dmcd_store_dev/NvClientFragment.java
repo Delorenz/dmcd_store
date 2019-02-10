@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import iutmetz.wmce.dmcd_store_dev.interfaces.ActiviteEnAttenteFindClient;
+import iutmetz.wmce.dmcd_store_dev.interfaces.ActiviteEnAttenteUpdateClient;
 import iutmetz.wmce.dmcd_store_dev.interfaces.IGestionPanierCategorie;
 import iutmetz.wmce.dmcd_store_dev.modele.Client;
 
@@ -24,7 +25,7 @@ import iutmetz.wmce.dmcd_store_dev.modele.Client;
  * Use the {@link NvClientFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NvClientFragment extends Fragment implements View.OnClickListener, ActiviteEnAttenteFindClient {
+public class NvClientFragment extends Fragment implements View.OnClickListener, ActiviteEnAttenteFindClient, ActiviteEnAttenteUpdateClient {
 
     public static final String TAG ="nv_client_tag";
     IGestionPanierCategorie ParentActivity;
@@ -136,6 +137,7 @@ public class NvClientFragment extends Fragment implements View.OnClickListener, 
                 Log.e("NVCL", "check if successfully persisted");
             } else {
 
+
                 cl.setNom(String.valueOf(nom_form.getText()));
                 cl.setPrenom(String.valueOf(prenom_form.getText()));
                 cl.setIdentifiant(String.valueOf(identifiant_form.getText()));
@@ -145,16 +147,18 @@ public class NvClientFragment extends Fragment implements View.OnClickListener, 
                 cl.setAdr_code_postal(Integer.parseInt(String.valueOf(adr_cp_form.getText())));
                 cl.setAdr_ville(String.valueOf(adr_ville_form.getText()));
                 cl.setAdr_pays(String.valueOf(adr_pays_form.getText()));
-
                 cl.setId_client(ParentActivity.getCl_connected().getId_client());
+
+
                 //Envoi requete update;
                 try {
-                    ClientDAO.getInstance(this).postDataUpdate(cl);
+                    Log.e("dump cl", cl.toString());
+                    ClientUpdateDAO.getInstance(this).postDataUpdate(cl);
+                    //ParentActivity.setCl_connected(cl);
                 } catch (Exception e) {
                     Log.e("Error update", e.getMessage());
                 }
 
-                //ClientDAO.getInstance(this).postDataConnexion(cl);
 
             }
 
@@ -170,6 +174,19 @@ public class NvClientFragment extends Fragment implements View.OnClickListener, 
             IGestionPanierCategorie activite = (IGestionPanierCategorie) this.getActivity();
             activite.DisplayInfoClientFragment();
         }
+    }
+
+    @Override
+    public void notifyRetourRequeteUpdateClient(String code, Client client) {
+        Log.e("UPCL", "retour requete update client");
+        // ParentActivity.setCl_connected(client);
+        //ClientDAO.getInstance(this).postDataConnexion(cl);
+        //ParentActivity.setCl_connected(cl);
+
+        IGestionPanierCategorie activite = (IGestionPanierCategorie) this.getActivity();
+        activite.DisplayInfoClientFragment();
+
+
     }
 
     /**
