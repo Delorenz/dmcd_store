@@ -66,7 +66,7 @@ public class NvClientFragment extends Fragment implements View.OnClickListener, 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ParentActivity = (IGestionPanierCategorie) this.getActivity();
+
         if (getArguments() != null) {
 
         }
@@ -115,23 +115,48 @@ public class NvClientFragment extends Fragment implements View.OnClickListener, 
     @Override
     public void onClick(View v) {
         if (v == validate) {
+            if (ParentActivity.getCl_connected() == null) {
 
-            cl.setNom(String.valueOf(nom_form.getText()));
-            cl.setPrenom(String.valueOf(prenom_form.getText()));
-            cl.setIdentifiant(String.valueOf(identifiant_form.getText()));
-            cl.setMot_de_passe(String.valueOf(mdp_form.getText()));
-            cl.setAdr_numero(Integer.parseInt(String.valueOf(adr_numero_form.getText())));
-            cl.setAdr_voie(String.valueOf(adr_voie_form.getText()));
-            cl.setAdr_code_postal(Integer.parseInt(String.valueOf(adr_cp_form.getText())));
-            cl.setAdr_ville(String.valueOf(adr_ville_form.getText()));
-            cl.setAdr_pays(String.valueOf(adr_pays_form.getText()));
-            Log.e("Recup champs", cl.toString());
 
-            ClientDAO.getInstance(this).postDataCreationCompte(cl);
-            Log.e("NVCL", "request for client creation launched");
+                cl.setNom(String.valueOf(nom_form.getText()));
+                cl.setPrenom(String.valueOf(prenom_form.getText()));
+                cl.setIdentifiant(String.valueOf(identifiant_form.getText()));
+                cl.setMot_de_passe(String.valueOf(mdp_form.getText()));
+                cl.setAdr_numero(Integer.parseInt(String.valueOf(adr_numero_form.getText())));
+                cl.setAdr_voie(String.valueOf(adr_voie_form.getText()));
+                cl.setAdr_code_postal(Integer.parseInt(String.valueOf(adr_cp_form.getText())));
+                cl.setAdr_ville(String.valueOf(adr_ville_form.getText()));
+                cl.setAdr_pays(String.valueOf(adr_pays_form.getText()));
+                Log.e("Recup champs", cl.toString());
 
-            ClientDAO.getInstance(this).postDataConnexion(cl);
-            Log.e("NVCL", "check if successfully persisted");
+                ClientDAO.getInstance(this).postDataCreationCompte(cl);
+                Log.e("NVCL", "request for client creation launched");
+
+                ClientDAO.getInstance(this).postDataConnexion(cl);
+                Log.e("NVCL", "check if successfully persisted");
+            } else {
+
+                cl.setNom(String.valueOf(nom_form.getText()));
+                cl.setPrenom(String.valueOf(prenom_form.getText()));
+                cl.setIdentifiant(String.valueOf(identifiant_form.getText()));
+                cl.setMot_de_passe(String.valueOf(mdp_form.getText()));
+                cl.setAdr_numero(Integer.parseInt(String.valueOf(adr_numero_form.getText())));
+                cl.setAdr_voie(String.valueOf(adr_voie_form.getText()));
+                cl.setAdr_code_postal(Integer.parseInt(String.valueOf(adr_cp_form.getText())));
+                cl.setAdr_ville(String.valueOf(adr_ville_form.getText()));
+                cl.setAdr_pays(String.valueOf(adr_pays_form.getText()));
+
+                cl.setId_client(ParentActivity.getCl_connected().getId_client());
+                //Envoi requete update;
+                try {
+                    ClientDAO.getInstance(this).postDataUpdate(cl);
+                } catch (Exception e) {
+                    Log.e("Error update", e.getMessage());
+                }
+
+                //ClientDAO.getInstance(this).postDataConnexion(cl);
+
+            }
 
         }
 
@@ -139,7 +164,7 @@ public class NvClientFragment extends Fragment implements View.OnClickListener, 
 
     @Override
     public void notifyRetourRequeteFindClient(String code, Client client) {
-        Log.e("NVCL verif save cl", client.toString());
+        Log.e("NVCL  save/update cl", client.toString());
         if (client != null) {
             ParentActivity.setCl_connected(client);
             IGestionPanierCategorie activite = (IGestionPanierCategorie) this.getActivity();
@@ -166,7 +191,7 @@ public class NvClientFragment extends Fragment implements View.OnClickListener, 
     @Override
     public void onStart() {
         super.onStart();
-
+        ParentActivity = (IGestionPanierCategorie) this.getActivity();
         this.nom_form = this.getActivity().findViewById(R.id.nom_form);
         this.prenom_form = this.getActivity().findViewById(R.id.prenom_form);
         this.identifiant_form = this.getActivity().findViewById(R.id.identifiant_form);
@@ -178,5 +203,19 @@ public class NvClientFragment extends Fragment implements View.OnClickListener, 
         this.adr_pays_form = this.getActivity().findViewById(R.id.adr_pays_form);
         this.validate = this.getActivity().findViewById(R.id.button_validate_nvcl);
         this.validate.setOnClickListener(this);
+
+        if (ParentActivity.getCl_connected() != null) {
+            Client c = ParentActivity.getCl_connected();
+
+            nom_form.setText(c.getNom());
+            prenom_form.setText(c.getPrenom());
+            identifiant_form.setText(c.getIdentifiant());
+            mdp_form.setText(c.getMot_de_passe());
+            adr_numero_form.setText(String.valueOf(c.getAdr_numero()));
+            adr_voie_form.setText(c.getAdr_voie());
+            adr_cp_form.setText(String.valueOf(c.getAdr_code_postal()));
+            adr_ville_form.setText(c.getAdr_ville());
+            adr_pays_form.setText(c.getAdr_pays());
+        }
     }
 }

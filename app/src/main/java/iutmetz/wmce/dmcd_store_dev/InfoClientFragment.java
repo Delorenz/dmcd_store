@@ -64,6 +64,7 @@ public class InfoClientFragment extends Fragment implements View.OnClickListener
         this.accueil_info = this.getActivity().findViewById(R.id.btn_accueil_info);
         this.modif_info = this.getActivity().findViewById(R.id.btn_modif_info);
         this.accueil_info.setOnClickListener(this);
+        this.modif_info.setOnClickListener(this);
 
         if (ParentActivity.getCl_connected() != null) {
             Client c = ParentActivity.getCl_connected();
@@ -111,6 +112,10 @@ public class InfoClientFragment extends Fragment implements View.OnClickListener
     public void onClick(View v) {
         if (v == accueil_info) {
             ParentActivity.DisplayCategoriesFragment();
+        }
+
+        if (v == modif_info) {
+            ParentActivity.DisplayNvClientFragment();
         }
     }
 

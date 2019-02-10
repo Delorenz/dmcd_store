@@ -76,6 +76,14 @@ public class ClientDAO implements DAO {
         Log.e("requete POST cl", "req client launched");
     }
 
+    public void postDataUpdate(Client params) {
+        RequeteSQL req = new RequeteSQL(activite, this);
+        req.execute(TABLE, URL_SERVEUR + "Client.php?id_client=" + params.getIdentifiant() + "&nom=" + params.getNom() + "&prenom=" + params.getPrenom() + "&identifiant=" + params.getIdentifiant() + "&mot_de_passe=" + params.getMot_de_passe() +
+                "&adr_numero=" + params.getAdr_numero() + "&adr_voie=" + params.getAdr_voie() + "&adr_code_postal=" + params.getAdr_code_postal() +
+                "&adr_ville=" + params.getAdr_ville() + "&adr_pays=" + params.getAdr_pays() + "&update-client=1");
+        Log.e("requete Update cl", "req update client launched");
+    }
+
     public void postDataCreationCompte(Client params) {
         RequeteSQL req = new RequeteSQL(activite, this);
         req.execute(TABLE, URL_SERVEUR + "Client.php?nom=" + params.getNom() + "&prenom=" + params.getPrenom() + "&identifiant=" + params.getIdentifiant() + "&mot_de_passe=" + params.getMot_de_passe() + "" +
