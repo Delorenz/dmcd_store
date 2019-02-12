@@ -24,6 +24,8 @@ public interface IGestionPanierCategorie {
     Client getCl_connected();
 
     void setCl_connected(Client client);
+
+    void DisplayMentionFragment();
 }
 
 

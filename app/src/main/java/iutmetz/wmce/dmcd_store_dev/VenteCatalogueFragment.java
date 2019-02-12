@@ -1,12 +1,11 @@
 package iutmetz.wmce.dmcd_store_dev;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,10 +16,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
+import iutmetz.wmce.dmcd_store_dev.interfaces.ActiviteEnAttenteFavoris;
 import iutmetz.wmce.dmcd_store_dev.interfaces.ActiviteEnAttenteFindProduits;
 import iutmetz.wmce.dmcd_store_dev.interfaces.ActiviteEnAttenteImage;
 import iutmetz.wmce.dmcd_store_dev.interfaces.ActiviteEnAttenteTaille;
@@ -29,7 +29,7 @@ import iutmetz.wmce.dmcd_store_dev.modele.Produit;
 import iutmetz.wmce.dmcd_store_dev.modele.Taille;
 
 
-public class VenteCatalogueFragment extends Fragment implements View.OnClickListener, ActiviteEnAttenteFindProduits, ActiviteEnAttenteImage, ActiviteEnAttenteTaille {
+public class VenteCatalogueFragment extends Fragment implements View.OnClickListener, ActiviteEnAttenteFindProduits, ActiviteEnAttenteImage, ActiviteEnAttenteTaille, ActiviteEnAttenteFavoris {
 
     private int noProduitCourant = 0;
     private ArrayList<Produit> liste;
@@ -41,6 +41,7 @@ public class VenteCatalogueFragment extends Fragment implements View.OnClickList
     private TextView prix;
     private Spinner tailles;
     private ImageButton Cart;
+    private Button btn_fav;
     ArrayAdapter<Taille> adapter;
     ArrayList<Taille> spinnerArray;
     private ImageView imgProduitZoom;
@@ -110,10 +111,11 @@ public class VenteCatalogueFragment extends Fragment implements View.OnClickList
 
         //Log.e("onStart","Not implemented !");
 
-
-        this.imgV = (ImageView) this.getActivity().findViewById(R.id.imageView);
-        this.btn_prev = (Button) this.getActivity().findViewById(R.id.button_prev);
-        this.btn_next = (Button) this.getActivity().findViewById(R.id.button_next);
+        this.btn_fav = this.getActivity().findViewById(R.id.btn_favoris);
+        this.btn_fav.setOnClickListener(this);
+        this.imgV = this.getActivity().findViewById(R.id.imageView);
+        this.btn_prev = this.getActivity().findViewById(R.id.button_prev);
+        this.btn_next = this.getActivity().findViewById(R.id.button_next);
         this.titre = this.getActivity().findViewById(R.id.textView2);
         this.desc = this.getActivity().findViewById(R.id.desc);
         this.prix = this.getActivity().findViewById(R.id.prix);
@@ -204,6 +206,17 @@ public class VenteCatalogueFragment extends Fragment implements View.OnClickList
             onClickImageZoomed(getActivity().getCurrentFocus());
         }
         */
+
+        if (v == getActivity().findViewById(R.id.btn_favoris)) {
+            if (ParentActivity.getCl_connected() != null) {
+                int id_cl = this.ParentActivity.getCl_connected().getId_client();
+                int no_pdt = this.noProduitCourant;
+
+                FavorisDAO.getInstance(this).AddFavoris(id_cl, no_pdt);
+            } else {
+                Log.e("Add FAV", "error adding or suppressing FAV");
+            }
+        }
     }
 
 
@@ -258,7 +271,17 @@ public class VenteCatalogueFragment extends Fragment implements View.OnClickList
         adapter.notifyDataSetChanged();
 
 
+    }
 
+    @Override
+    public void notifyRetourFavoris(String code, String msg) {
+
+        Context context = (Context) this.ParentActivity;
+        CharSequence text = msg;
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 /*
     public void onClickImage(View view) {

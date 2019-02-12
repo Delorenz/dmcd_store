@@ -12,7 +12,7 @@ import iutmetz.wmce.dmcd_store_dev.interfaces.IGestionPanierCategorie;
 import iutmetz.wmce.dmcd_store_dev.modele.Client;
 
 
-public class activity_landing extends AppCompatActivity implements IGestionPanierCategorie ,ClientFragment.OnFragmentInteractionListener, NvClientFragment.OnFragmentInteractionListener, InfoClientFragment.OnFragmentInteractionListener  {
+public class activity_landing extends AppCompatActivity implements IGestionPanierCategorie, ClientFragment.OnFragmentInteractionListener, NvClientFragment.OnFragmentInteractionListener, InfoClientFragment.OnFragmentInteractionListener, MentionFragment.OnFragmentInteractionListener {
 
 
     private CategoriesFragment categorieFragment;
@@ -20,6 +20,7 @@ public class activity_landing extends AppCompatActivity implements IGestionPanie
     private ClientFragment clientFragment;
     private InfoClientFragment infoClientFragment;
     private NvClientFragment NvClientFragment;
+    private MentionFragment MentionFragment;
     private Client cl_connected;
 
     public Client getCl_connected() {
@@ -28,6 +29,22 @@ public class activity_landing extends AppCompatActivity implements IGestionPanie
 
     public void setCl_connected(Client cl_connected) {
         this.cl_connected = cl_connected;
+    }
+
+    @Override
+    public void DisplayMentionFragment() {
+
+        FragmentManager fm = this.getSupportFragmentManager();
+        this.MentionFragment = (MentionFragment) fm.findFragmentByTag(iutmetz.wmce.dmcd_store_dev.MentionFragment.TAG);
+        if (this.MentionFragment == null) {
+            this.MentionFragment = new MentionFragment();
+        }
+
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.fragment1, this.MentionFragment, iutmetz.wmce.dmcd_store_dev.MentionFragment.TAG);
+        ft.addToBackStack(null);
+        ft.commit();
+
     }
 
 

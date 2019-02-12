@@ -1,6 +1,8 @@
 package iutmetz.wmce.dmcd_store_dev.modele;
 
-public class Client {
+import java.io.Serializable;
+
+public class Client implements Serializable {
 //BdD : Client(id_client, nom, prenom, identifiant, mot_de_passe, adr_numero, adr_voie, adr_code_postal, adr_ville, adr_pays)
     private int id_client;
     private String nom;

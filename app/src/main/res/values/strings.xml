@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">dmcd_store_dev</string>
+    <string name="app_name">DMCD STORE</string>
 
     <string name="vc_txt_tarifproduit">Tarif : %1$.2f \u20ac</string>
     <string name="Retour">Retour</string>

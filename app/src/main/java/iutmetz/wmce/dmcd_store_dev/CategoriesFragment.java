@@ -32,6 +32,7 @@ public class CategoriesFragment extends Fragment implements AdapterView.OnItemCl
     private ArrayList <Bitmap> listeImagesCategories;
     private Button btn_cl;
     private TextView txtPanier;
+    private Button btn_mention;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,6 +77,8 @@ public class CategoriesFragment extends Fragment implements AdapterView.OnItemCl
             this.updatePanier();
             this.btn_cl = this.getActivity().findViewById(R.id.button_cl);
             this.btn_cl.setOnClickListener(this);
+            this.btn_mention = this.getActivity().findViewById(R.id.btn_mention);
+            this.btn_mention.setOnClickListener(this);
         }
 
     @Override
@@ -146,6 +149,10 @@ public class CategoriesFragment extends Fragment implements AdapterView.OnItemCl
         if(v == btn_cl){
             IGestionPanierCategorie activite = (IGestionPanierCategorie) this.getActivity();
             activite.DisplayClientFragment();
+        }
+        if (v == btn_mention) {
+            IGestionPanierCategorie activite = (IGestionPanierCategorie) this.getActivity();
+            activite.DisplayMentionFragment();
         }
     }
 }

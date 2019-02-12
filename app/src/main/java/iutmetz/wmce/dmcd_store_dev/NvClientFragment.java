@@ -3,6 +3,7 @@ package iutmetz.wmce.dmcd_store_dev;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -180,11 +181,11 @@ public class NvClientFragment extends Fragment implements View.OnClickListener, 
     public void notifyRetourRequeteUpdateClient(String code, Client client) {
         Log.e("UPCL", "retour requete update client");
         // ParentActivity.setCl_connected(client);
-        //ClientDAO.getInstance(this).postDataConnexion(cl);
+        ClientDAO.getInstance(this).postDataConnexion(cl);
         //ParentActivity.setCl_connected(cl);
 
-        IGestionPanierCategorie activite = (IGestionPanierCategorie) this.getActivity();
-        activite.DisplayInfoClientFragment();
+        //IGestionPanierCategorie activite = (IGestionPanierCategorie) this.getActivity();
+        //activite.DisplayInfoClientFragment();
 
 
     }
@@ -234,5 +235,11 @@ public class NvClientFragment extends Fragment implements View.OnClickListener, 
             adr_ville_form.setText(c.getAdr_ville());
             adr_pays_form.setText(c.getAdr_pays());
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("cl", cl);
     }
 }
